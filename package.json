@@ -1,0 +1,16 @@
+{
+  "name": "hangman",
+  "version": "1.0.0",
+  "description": "full stack implementation of hangman",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node.js",
+    "angularjs",
+    "mongodb"
+  ],
+  "author": "Blake Olsen",
+  "license": "ISC"
+}
