@@ -1,0 +1,18 @@
+
+case "$1" in 
+  "start")  case "$2" in
+              "database") echo "starting database: mongodb://localhost:9443/"
+                          mongod --dbpath ./database --port 9443
+                          ;;
+              "server")   npm start --prefix ./server
+                          ;;
+              "client")   npm start --prefix ./client
+                          ;;
+              "all")      echo "starting database: mongodb://localhost:9443/"
+                          mongod --dbpath ./database --port 9443
+                          npm start --prefix ./server
+                          npm start --prefix ./client
+                          ;;
+            esac
+            ;;
+esac

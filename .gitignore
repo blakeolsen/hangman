@@ -1,0 +1,8 @@
+./**/.DS_Store
+
+./**/node_modules
+./**/package-lock.json
+./database
+
+./**/.sublime-project
+./**/.sublime-workspace
