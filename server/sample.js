@@ -9,7 +9,7 @@ const args      = require('minimist')(process.argv.slice(2)),
 console.log(args.file || "../test/sample.json")
 
 mongoose.connect(
-  `mongodb://${args.db_address || "localhost"}:${args.db_port || 9443}/${args.db_database || "hangman-database"}`
+  `mongodb://${args.db_address || "localhost"}:${args.db_port || 10443}/${args.db_database || "hangman-database"}`
 );
 
 async.each(

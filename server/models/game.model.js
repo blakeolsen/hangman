@@ -41,6 +41,8 @@ const GameSchema = new MongooseSchema({
 
   word_uuid: { type: String, required: true },
 
+  lives: { type: Number, required: true, default: () => 10 },
+
   history: { type: [], required: true, default: () => [] }
 
 });
@@ -53,8 +55,11 @@ const GameSchema = new MongooseSchema({
 GameSchema.methods.move = function(letter, done) {
   const game = this;
 
+  // Error if there are no more lives remaining
+  if (game.lives == 0)
+    return done(400, {"message": "no more lives remaining"})
   // Ensure Letter Exists, Is A Character, Has Not Been Guessed
-  if (!letter || letter.length != 1 || game.history.map(m => m.letter).includes(letter)) 
+  else if (!letter || letter.length != 1 || game.history.map(m => m.letter).includes(letter)) 
     return done(405, {"message": "invalid entry"});
 
   Solution.findById(this.word_uuid, (err, solution) => {
@@ -72,6 +77,8 @@ GameSchema.methods.move = function(letter, done) {
     }, (err, move) => {
       if (err)
         return done(500, err);
+      else if (move.delta.length == 0)
+        game.lives -= 1;
 
       // Add Move to Game History
       game.history.push(move);

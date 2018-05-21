@@ -2,6 +2,7 @@
 const args            = require('minimist')(process.argv.slice(2)),
 
       express         = require('express'),
+      cors            = require('cors'),
       mongoose        = require('mongoose'),
       winston         = require('winston'),
       expressWinston  = require('express-winston'),
@@ -12,6 +13,8 @@ const args            = require('minimist')(process.argv.slice(2)),
       User            = require('./models/user.model.js');
 
 const server = express();
+
+server.use(cors());
 
 server.use(expressWinston.logger({
   msg: "HTTP {{req.method}} {{req.url}}",
@@ -25,15 +28,15 @@ server.use(expressWinston.logger({
 }));
 
 mongoose.connect(
-  `mongodb://${args.db_address || "localhost"}:${args.db_port || 9443}/${args.db_database || "hangman-database"}`
+  `mongodb://${args.db_address || "localhost"}:${args.db_port || 10443}/${args.db_database || "hangman-database"}`
 );
 
 server.use('/auth', userRoute);
 server.use('/game', gameRoute);
 
 server.listen(
-  args.port || 8443,
-  () => { console.log(`hangman-server: localhost:${args.port || 8443}`)}
+  args.port || 9443,
+  () => { console.log(`hangman-server: localhost:${args.port || 9443}`)}
 );
 
 
