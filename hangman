@@ -15,4 +15,8 @@ case "$1" in
                           ;;
             esac
             ;;
+  "setup")  case "$2" in
+              "words")    node ./server/sample.js "${@:3}"
+            ;;
+            esac
 esac
